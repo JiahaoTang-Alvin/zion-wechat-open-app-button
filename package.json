@@ -3,7 +3,11 @@
   "version": "0.0.2",
   "description": "Zion mini program code component: configurable button for launching the source App.",
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/JiahaoTang-Alvin/zion-wechat-open-app-button",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JiahaoTang-Alvin/zion-wechat-open-app-button.git"
+  },
   "category": "input",
   "platforms": [
     "WECHAT"
