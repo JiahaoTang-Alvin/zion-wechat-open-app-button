@@ -20,12 +20,13 @@ function App() {
           borderWidth: 1,
           borderRadius: 8,
           borderUnit: 'px',
-          borderColor: '#5BB1FF',
-          backgroundColor: '#EEF7FF',
-          textColor: '#5BB1FF',
+          borderColor: '5BB1FF',
+          backgroundColor: 'EEF7FF',
+          textColor: '5BB1FF',
           fontSize: 16,
           fontUnit: 'px',
           fontWeight: 600,
+          fontFamily: 'PingFang SC, Microsoft YaHei, sans-serif',
         }}
         propState={{
           clickCount: {

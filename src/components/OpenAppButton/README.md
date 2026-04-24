@@ -39,6 +39,7 @@ App 端读取后自行解析并跳转：
 | `fontSize` | `number` | 字号 |
 | `fontUnit` | `string` | 字号单位 |
 | `fontWeight` | `number` | 字重 |
+| `fontFamily` | `string` | 字体族，支持直接填写字体栈 |
 | `disabled` | `boolean` | 禁用状态 |
 
 ## State
@@ -58,3 +59,8 @@ App 端读取后自行解析并跳转：
 ## 限制
 
 该能力必须由用户点击触发，并且小程序需要处于微信允许打开 App 的场景中。小程序不能用该按钮打开任意 App，只能跳回符合条件的来源 App。
+
+颜色值支持 `5BB1FF` 和 `#5BB1FF` 两种 hex 写法。
+
+不建议在 Zion 右侧“系统设计”里继续设置背景、边框、字体等宿主样式，优先使用组件参数。若需要限制二次改样式，建议将配置完成的代码组件保存为 Zion 自定义组件后复用：
+[https://docs.functorz.com/design/custom_component/](https://docs.functorz.com/design/custom_component/)

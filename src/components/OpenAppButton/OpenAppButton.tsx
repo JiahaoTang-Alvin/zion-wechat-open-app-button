@@ -19,6 +19,7 @@ export interface OpenAppButtonPropData {
   fontSize?: number;
   fontUnit?: string;
   fontWeight?: number;
+  fontFamily?: string;
   disabled?: boolean;
 }
 
@@ -58,6 +59,23 @@ function safeCssValue(value: string | undefined, fallback: string): string {
     return fallback;
   }
   return trimmed;
+}
+
+function safeColorValue(value: string | undefined, fallback: string): string {
+  const safeValue = safeCssValue(value, fallback);
+  if (/^[0-9a-fA-F]{3}$/.test(safeValue)) {
+    return `#${safeValue}`;
+  }
+  if (/^[0-9a-fA-F]{4}$/.test(safeValue)) {
+    return `#${safeValue}`;
+  }
+  if (/^[0-9a-fA-F]{6}$/.test(safeValue)) {
+    return `#${safeValue}`;
+  }
+  if (/^[0-9a-fA-F]{8}$/.test(safeValue)) {
+    return `#${safeValue}`;
+  }
+  return safeValue;
 }
 
 function safeUnit(value: string | undefined, fallback: string): string {
@@ -123,10 +141,20 @@ export function OpenAppButton({
   const fontUnit = safeUnit(propData.fontUnit, 'px');
   const borderWidth = safeNumber(propData.borderWidth, 1, 0, 100);
   const disabled = !!propData.disabled;
+  const resolvedWidth = safeCssValue(propData.width, '100%');
+  const resolvedHeight = safeCssValue(propData.height, 'auto');
+
+  const containerStyle: React.CSSProperties = {
+    boxSizing: 'border-box',
+    width: resolvedWidth,
+    maxWidth: '100%',
+    minWidth: 0,
+    height: resolvedHeight === 'auto' ? 'auto' : resolvedHeight,
+  };
 
   const buttonStyle: React.CSSProperties = {
-    width: safeCssValue(propData.width, '100%'),
-    height: safeCssValue(propData.height, 'auto'),
+    width: '100%',
+    height: resolvedHeight === 'auto' ? 'auto' : '100%',
     padding: `${toCssLength(
       propData.paddingVertical,
       12,
@@ -134,12 +162,13 @@ export function OpenAppButton({
     )} ${toCssLength(propData.paddingHorizontal, 18, paddingUnit)}`,
     borderWidth: `${borderWidth}${borderUnit}`,
     borderStyle: borderWidth > 0 ? 'solid' : 'none',
-    borderColor: safeCssValue(propData.borderColor, '#1f2937'),
+    borderColor: safeColorValue(propData.borderColor, '#1f2937'),
     borderRadius: toCssLength(propData.borderRadius, 8, borderUnit),
-    backgroundColor: safeCssValue(propData.backgroundColor, '#111827'),
-    color: safeCssValue(propData.textColor, '#ffffff'),
+    backgroundColor: safeColorValue(propData.backgroundColor, '#111827'),
+    color: safeColorValue(propData.textColor, '#ffffff'),
     fontSize: toCssLength(propData.fontSize, 16, fontUnit, 8, 80),
     fontWeight: safeNumber(propData.fontWeight, 600, 100, 900),
+    fontFamily: safeCssValue(propData.fontFamily, 'inherit'),
     opacity: disabled ? 0.55 : 1,
   };
 
@@ -168,16 +197,18 @@ export function OpenAppButton({
       };
 
   return (
-    <button
-      {...miniProgramAttributes}
-      type="button"
-      className={styles['button']}
-      style={buttonStyle}
-      disabled={disabled}
-      onClick={handleClick}
-      onError={handleLaunchError}
-    >
-      {safeText(propData.buttonText, '打开 APP')}
-    </button>
+    <div className={styles['root']} style={containerStyle}>
+      <button
+        {...miniProgramAttributes}
+        type="button"
+        className={styles['button']}
+        style={buttonStyle}
+        disabled={disabled}
+        onClick={handleClick}
+        onError={handleLaunchError}
+      >
+        {safeText(propData.buttonText, '打开 APP')}
+      </button>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 {
   "name": "open-app-button-component",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Zion mini program code component: configurable button for launching the source App.",
   "license": "MIT",
   "homepage": "https://github.com/JiahaoTang-Alvin/zion-wechat-open-app-button",

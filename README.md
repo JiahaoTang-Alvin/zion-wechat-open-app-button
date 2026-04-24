@@ -5,7 +5,7 @@ Zion 微信小程序代码组件：可配置样式的按钮，用于通过微信
 已发布信息：
 
 - Zion Package ExId: `27qxnJ91XAN`
-- Version: `0.0.2`
+- Version: `0.0.3`
 - Platform: `WECHAT`
 - Component: `OpenAppButton`
 
@@ -100,13 +100,18 @@ String extraData = launchMiniProResp.extMsg;
 | `backgroundColor` | `string` | `#111827` | 背景颜色 |
 | `textColor` | `string` | `#ffffff` | 文本颜色 |
 
+颜色值支持两种 hex 写法：
+
+- `5BB1FF`
+- `#5BB1FF`
+
 当前本地预览使用：
 
 ```json
 {
-  "borderColor": "#5BB1FF",
-  "backgroundColor": "#EEF7FF",
-  "textColor": "#5BB1FF",
+  "borderColor": "5BB1FF",
+  "backgroundColor": "EEF7FF",
+  "textColor": "5BB1FF",
   "borderWidth": 1,
   "borderRadius": 8
 }
@@ -119,6 +124,7 @@ String extraData = launchMiniProResp.extMsg;
 | `fontSize` | `number` | `16` | 字号数值 |
 | `fontUnit` | `string` | `px` | 字号单位，例如 `px`、`rpx` |
 | `fontWeight` | `number` | `600` | 字重，范围建议 `100` 到 `900` |
+| `fontFamily` | `string` | `inherit` | 字体族，留空则继承宿主字体 |
 
 ## State
 
@@ -139,3 +145,17 @@ String extraData = launchMiniProResp.extMsg;
 `invalid scene`: 当前小程序不具备打开 App 的能力。常见原因是小程序不是从 App 打开的，或者当前场景不符合微信开放能力规则。
 
 本地网页预览只能检查按钮样式，不能验证 `launchApp`。需要在微信小程序真机预览或微信开发者工具对应能力环境中验证。
+
+## 使用建议
+
+请不要在 Zion 右侧“系统设计”里继续设置这个代码组件的背景、边框、字体等样式，优先使用组件自身暴露的参数。否则宿主容器样式和按钮内部样式会叠加，容易出现看起来像截图里那种“外层一块、里层一个按钮”的效果。
+
+目前没有查到代码组件可以通过项目配置或组件元数据直接关闭这块“系统设计”面板。若你要避免其他人继续改样式，建议先把参数配置好的代码组件保存为 Zion 自定义组件；官方文档中的自定义组件说明写明，保存后实例不再继续编辑样式：[自定义组件](https://docs.functorz.com/design/custom_component/)。
+
+字体这一项目前支持 `fontFamily` 字符串参数，例如：
+
+```text
+PingFang SC, Microsoft YaHei, sans-serif
+```
+
+代码组件这层目前不能做成 Zion 内建的字体下拉选择器，所以如果需要精确控字，请直接填字体族字符串。
