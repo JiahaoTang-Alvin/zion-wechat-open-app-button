@@ -1,0 +1,7 @@
+<svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#F8FAFC"/>
+  <rect x="42" y="72" width="216" height="56" rx="10" fill="#111827"/>
+  <text x="150" y="107" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">Open APP</text>
+  <path d="M196 100H215" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M210 93L217 100L210 107" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
